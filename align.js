@@ -2,6 +2,7 @@ var box1 = document.getElementById("s1");
 var box2 = document.getElementById("s2");
 
 var s1a = document.getElementById("s1a");
+var pmap = document.getElementById("pmap");
 var s2a = document.getElementById("s2a");
 
 var sc = document.getElementById("sc");
@@ -133,7 +134,7 @@ function validateInput()
 	if(val1 == "" && val2 == "")
 	{
 		dataobj.valid = false;
-		errdata.noseqs = true;
+		//errdata.noseqs = true;
 		dataobj.notices.push("Please enter 2 DNA sequences.");
 	}
 	else
@@ -179,12 +180,12 @@ function validateInput()
 function updateErrors(errors, notices)
 {
 	console.log("ERRORS: ", errors);
+	errlist = document.getElementById("errors")
+	errlist.innerHTML = "";
+	errlist.id = "errors";
+	errlist.className = "outerr";
 	if(errors.length > 0)
 	{
-		errlist = document.getElementById("errors")
-		errlist.innerHTML = "";
-		errlist.id = "errors";
-		errlist.className = "outerr";
 		errors.forEach(function (error) {
 			var err = document.createElement("li");
 			err.innerHTML = error;
@@ -195,10 +196,6 @@ function updateErrors(errors, notices)
 
 	if(notices.length > 0)
 	{
-		errlist = document.getElementById("errors")
-		errlist.innerHTML = "";
-		errlist.id = "errors";
-		errlist.className = "outerr";
 		notices.forEach(function (notice) {
 			var err = document.createElement("li");
 			err.innerHTML = notice;
@@ -246,10 +243,13 @@ var dropdownhandler = function(event){
 	s1a.innerHTML = data[0];
 	s1a.id = "s1a";
 	s1a.className = "data";
+	pmap.innerHTML = data[2];
+	pmap.id = "pmap";
+	pmap.className = "data";
 	s2a.innerHTML = data[1];
 	s2a.id = "s2a";
 	s2a.className = "data";
-	sc.innerHTML = data[2];
+	sc.innerHTML = data[3];
 	sc.id = "sc";
 }
 
@@ -299,10 +299,13 @@ var scorehandler = function(event){
 	s1a.innerHTML = data[0];
 	s1a.id = "s1a";
 	s1a.className = "data";
+	pmap.innerHTML = data[2];
+	pmap.id = "pmap";
+	pmap.className = "data";
 	s2a.innerHTML = data[1];
 	s2a.id = "s2a";
 	s2a.className = "data";
-	sc.innerHTML = data[2];
+	sc.innerHTML = data[3];
 	sc.id = "sc";
 };
 
@@ -421,10 +424,14 @@ var seqhandler = function(event){
 		s1a.innerHTML = data[0];
 		s1a.id = "s1a";
 		s1a.className = "data";
+		pmap.innerHTML = data[2];
+		console.log(data[2]);
+		pmap.id = "pmap";
+		pmap.className = "data";
 		s2a.innerHTML = data[1];
 		s2a.id = "s2a";
 		s2a.className = "data";
-		sc.innerHTML = data[2];
+		sc.innerHTML = data[3];
 		sc.id = "sc";
 	}
 	else
@@ -448,6 +455,7 @@ function globalAlign(s1, s2)
 	var aligned = outarr2[0];
 	var followed = outarr2[1];
 	updateTable(s1, s2, outarr, followed);
+	//console.log(aligned[2]);
 	return aligned;
 }
 
@@ -503,6 +511,7 @@ function globalTraceback(s1, s2, sctab, btab)
 	var score = sctab[i][j];
 	var s1a = "";
 	var s2a = "";
+	var pmap = "";
 	var done = false;
 	var followed = [];
 
@@ -517,6 +526,7 @@ function globalTraceback(s1, s2, sctab, btab)
 
 	while(!done)
 	{
+		pmapn = "-";
 		followed[i][j] = "*";
 		if(i == 0 && j == 0)
 		{
@@ -526,6 +536,7 @@ function globalTraceback(s1, s2, sctab, btab)
 		else if(i == 0 && j > 0)
 		{
 			s1a = "-".repeat(j)+s1a;
+			pmap = "-".repeat(j)+pmap;
 			s2a = s2.slice(0, j)+s2a;
 			done = true;
 			for(var j_ = 0; j_<j; j_++)
@@ -537,6 +548,7 @@ function globalTraceback(s1, s2, sctab, btab)
 		else if(i > 0 && j == 0)
 		{
 			s1a = s1.slice(0, i)+s1a;
+			pmap = " ".repeat(i)+pmap;
 			s2a = "-".repeat(i)+s2a;
 			done = true;
 			for(var i_ = 0; i_<i; i_++)
@@ -561,6 +573,10 @@ function globalTraceback(s1, s2, sctab, btab)
 			}
 			else if(btab[i][j] == "mis" || btab[i][j] == "mat")
 			{
+				if(btab[i][j] == "mat")
+				{
+					pmapn = "|";
+				}
 				s1a = s1[i-1]+s1a;
 				s2a = s2[j-1]+s2a;
 				i = i-1;
@@ -571,8 +587,9 @@ function globalTraceback(s1, s2, sctab, btab)
 				throw "Invalid backtrack code: "+btab[i][j];
 			}
 		}
+		pmap = pmapn+pmap;
 	}
-	return[[s1a, s2a, score], followed];
+	return[[s1a, s2a, pmap.replace(new RegExp("-", 'g'), "&nbsp;"), score], followed];
 }
 
 function localAlign(s1, s2)
@@ -633,6 +650,7 @@ function localTraceback(s1, s2, sctab, btab)
 	var score = sctab[i][j];
 	var s1a = "";
 	var s2a = "";
+	var pmap = "";
 	var done = false;
 	var followed = [];
 
@@ -647,6 +665,7 @@ function localTraceback(s1, s2, sctab, btab)
 
 	while(!done)
 	{
+		pmapn = "-";
 		followed[i][j] = "*";
 		if(sctab[i][j] == 0)
 		{
@@ -669,6 +688,10 @@ function localTraceback(s1, s2, sctab, btab)
 			}
 			else if(btab[i][j] == "mis" || btab[i][j] == "mat")
 			{
+				if(btab[i][j] == "mat")
+				{
+					pmapn = "|";
+				}
 				s1a = s1[i-1]+s1a;
 				s2a = s2[j-1]+s2a;
 				i = i-1;
@@ -679,8 +702,9 @@ function localTraceback(s1, s2, sctab, btab)
 				throw "Invalid backtrack code: "+btab[i][j];
 			}
 		}
+		pmap = pmapn+pmap;
 	}
-	return[[s1a, s2a, score], followed];
+	return[[s1a, s2a, pmap.replace(new RegExp("-", 'g'), "&nbsp;"), score], followed];
 }
 
 
@@ -747,6 +771,7 @@ function fittingTraceback(s1, s2, sctab, btab)
 	var score = sctab[i][j];
 	var s1a = "";
 	var s2a = "";
+	var pmap = "";
 	var done = false;
 	var followed = [];
 
@@ -761,6 +786,7 @@ function fittingTraceback(s1, s2, sctab, btab)
 
 	while(!done)
 	{
+		pmapn = "-";
 		followed[i][j] = "*";
 		if(i == 0)
 		{
@@ -770,6 +796,7 @@ function fittingTraceback(s1, s2, sctab, btab)
 		else if(i > 0 && j == 0)
 		{
 			s1a = s1.slice(0, i)+s1a;
+			pmap = "-".repeat(i)+pmap;
 			s2a = "-".repeat(i)+s2a;
 			done = true;
 			for(var i_ = 0; i_<i; i_++)
@@ -794,6 +821,10 @@ function fittingTraceback(s1, s2, sctab, btab)
 			}
 			else if(btab[i][j] == "mis" || btab[i][j] == "mat")
 			{
+				if(btab[i][j] == "mat")
+				{
+					pmapn = "|";
+				}
 				s1a = s1[i-1]+s1a;
 				s2a = s2[j-1]+s2a;
 				i = i-1;
@@ -804,8 +835,9 @@ function fittingTraceback(s1, s2, sctab, btab)
 				throw "Invalid backtrack code: \""+btab[i][j]+"\" "+i+" "+j;
 			}
 		}
+		pmap = pmapn+pmap;
 	}
-	return[[s1a, s2a, score], followed];
+	return[[s1a, s2a, pmap.replace(new RegExp("-", 'g'), "&nbsp;"), score], followed];
 }
 
 
@@ -872,6 +904,7 @@ function overlapTraceback(s1, s2, sctab, btab)
 	var score = sctab[i][j];
 	var s1a = "";
 	var s2a = "";
+	var pmap = "";
 	var done = false;
 	var followed = [];
 
@@ -886,6 +919,7 @@ function overlapTraceback(s1, s2, sctab, btab)
 
 	while(!done)
 	{
+		pmapn = "-";
 		followed[i][j] = "*";
 		if(j == 0)
 		{
@@ -900,6 +934,7 @@ function overlapTraceback(s1, s2, sctab, btab)
 		else if(i == 0 && j > 0)
 		{
 			s1a = "-".repeat(j)+s1a;
+			pmap = "-".repeat(j)+pmap;
 			s2a = s2.slice(0, j)+s2a;
 			done = true;
 			for(var j_ = 0; j_<j; j_++)
@@ -924,6 +959,10 @@ function overlapTraceback(s1, s2, sctab, btab)
 			}
 			else if(btab[i][j] == "mis" || btab[i][j] == "mat")
 			{
+				if(btab[i][j] == "mat")
+				{
+					pmapn = "|";
+				}
 				s1a = s1[i-1]+s1a;
 				s2a = s2[j-1]+s2a;
 				i = i-1;
@@ -934,6 +973,7 @@ function overlapTraceback(s1, s2, sctab, btab)
 				throw "Invalid backtrack code: \""+btab[i][j]+"\" "+i+" "+j;
 			}
 		}
+		pmap = pmapn+pmap;
 	}
-	return[[s1a, s2a, score], followed];
+	return[[s1a, s2a, pmap.replace(new RegExp("-", 'g'), "&nbsp;"), score], followed];;
 }
