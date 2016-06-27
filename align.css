@@ -1,0 +1,70 @@
+.output
+{
+	font-size: 120%;
+}
+.outerr
+{
+
+}
+.error
+{
+	color: red;
+}
+.notice
+{
+	color: blue;
+}
+.sctab
+{
+	border-collapse: collapse;
+}
+.outh
+{
+	display: none;
+}
+.ins
+{
+	background-image: url(arrowleft.png);
+	color: #0000FF;
+}
+.del
+{
+	background-image: url(arrowup.png);
+	color: #FF0000;
+}
+.mis
+{
+	background-image: url(arrowdiagorange.png);
+	color: #FF8800;
+}
+.mat
+{
+	background-image: url(arrowdiaggreen.png);
+	color: #000000;
+}
+.sccell
+{
+	border: solid 2px black;
+}
+.path
+{
+	border: solid 2px #00FF00;
+}
+.other
+{
+
+}
+.cell
+{
+	text-align: right;
+	width: 30px;
+	height: 30px;
+}
+.data
+{
+	font-family: monospace;
+}
+#descr
+{
+	width:550px;
+}

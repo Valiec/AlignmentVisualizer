@@ -1,0 +1,47 @@
+<html>
+<head><title>JS Test</title><link rel="stylesheet" type="text/css" href="align.css" /></style></head>
+<body onload="init()">
+<form>
+	<label>Algorithm: <select id="algorithm">
+		<option value = "global">Global Alignment</option>
+		<option value = "local">Local Alignment</option>
+		<option value = "fitting">Fitting Alignment</option>
+		<option value = "overlap">Overlap Alignment</option>
+	</select></label>
+</form>
+<p id = "descr">Global Alignment: <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a mi vitae est dapibus convallis.
+Aenean aliquam turpis a urna vulputate placerat. Nullam feugiat libero eu tempus vulputate.
+Suspendisse vehicula vestibulum dui. Nullam in sodales erat. Aliquam auctor ligula et sagittis viverra.
+Vestibulum efficitur ex vitae facilisis porta.</p>
+<form>
+	<label>Sequence 1: <input id="s1"></input></label>
+	<label>Sequence 2: <input id="s2"></input></label>
+	<br>
+</form>
+
+<form>
+	<p>Scoring matrix:</p>
+	<table>
+		<tr><th></th> <th>A</th> <th>T</th> <th>C</th> <th>G</th></tr>
+		<tr><th>A</th> <td><input inputmode="numeric" type="number" id = "AA"></input></td> <td><input inputmode="numeric" type="number" id = "AT"></input></td> <td><input inputmode="numeric" type="number" id = "AC"></input></td> <td><input inputmode="numeric" type="number" id = "AG"></input></td></tr>
+		<tr><th>T</th> <td><input inputmode="numeric" type="number" id = "TA"></input></td> <td><input inputmode="numeric" type="number" id = "TT"></input></td> <td><input inputmode="numeric" type="number" id = "TC"></input></td> <td><input inputmode="numeric" type="number" id = "TG"></input></td></tr>
+		<tr><th>C</th> <td><input inputmode="numeric" type="number" id = "CA"></input></td> <td><input inputmode="numeric" type="number" id = "CT"></input></td> <td><input inputmode="numeric" type="number" id = "CC"></input></td> <td><input inputmode="numeric" type="number" id = "CG"></input></td></tr>
+		<tr><th>G</th> <td><input inputmode="numeric" type="number" id = "GA"></input></td> <td><input inputmode="numeric" type="number" id = "GT"></input></td> <td><input inputmode="numeric" type="number" id = "GC"></input></td> <td><input inputmode="numeric" type="number" id = "GG"></input></td></tr>
+	</table>
+	<br>
+	<label>Gap penalty: <input inputmode="numeric" type="number" id = "gap"></input></label>
+</form>
+
+<p id="output" class="outh"><span class="label">Alignment:</span><br>
+	<span id="s1a" class="data"></span>
+	<br>
+	<span id="s2a" class="data"></span>
+	<br>Score: <span id="sc">0</span>
+</p>
+
+<table id="sctab" class="outh"></table>
+
+<p><ul id="errors" class="outh"></ul></p>
+
+<script type="text/javascript" src="align.js"></script></body>
+<html>
