@@ -13,7 +13,7 @@ var fieldnames = ["s1", "s2", "AA", "AT", "AC", "AG", "TA", "TT", "TC", "TG", "C
 
 var scnames = ["AA", "AT", "AC", "AG", "TT", "TC", "TG", "CC", "CG", "GG", "gap"];
 
-var errmap = {"AA":"A-A match reward", "AT":"A-T/T-A mismatch penalty", "AC":"A-C/C-A mismatch penalty", "AG":"A-G/G-A mismatch penalty", "TT":"T-T match reward", "TC":"T-C/C-A mismatch penalty", "TG":"T-G/G-T mismatch penalty", "CC":"C-C match reward", "CG":"C-G/G-C mismatch penalty", "GG":"G-G match reward", "gap":"gap penalty"}
+var errmap = {"AA":"A-A match reward", "AT":"A-T/T-A mismatch penalty", "AC":"A-C/C-A mismatch penalty", "AG":"A-G/G-A mismatch penalty", "TT":"T-T match reward", "TC":"T-C/C-A mismatch penalty", "TG":"T-G/G-T mismatch penalty", "CC":"C-C match reward", "CG":"C-G/G-C mismatch penalty", "GG":"G-G match reward", "gap":"Gap penalty"}
 
 var errdata = {noseqs:false};
 
@@ -102,7 +102,7 @@ var keypresshandler = function(event){
 	var strbases = "ATCG";
 	if(event.target.id == "s1" || event.target.id == "s2")
 	{
-		if((!strbases.includes(event.key)) && (!strbases.toLowerCase().includes(event.key)) && (event.key.length == 1))
+		if((!strbases.includes(event.key)) && (!strbases.toLowerCase().includes(event.key)) && (event.key.length == 1) && !(event.ctrlKey || event.altKey || event.shiftKey || event.metaKey))
 		{
 			event.preventDefault();
 			console.log("INVALID:", event.key, event.key.length);
@@ -160,7 +160,8 @@ function validateInput()
 		{
 			dataobj.valid = false;
 			console.log("SEQ 1 ERROR "+val1);
-			dataobj.errors.push("[Can't happen!] Sequence 1 is invalid.");
+			dataobj.errors.push("Sequence 1 is invalid.");
+			break;
 		}
 	}
 	for(i = 0; i<val2.length; i++)
@@ -169,7 +170,8 @@ function validateInput()
 		{
 			dataobj.valid = false;
 			console.log("SEQ 2 ERROR "+val2);
-			dataobj.errors.push("[Can't happen!] Sequence 2 is invalid.");
+			dataobj.errors.push("Sequence 2 is invalid.");
+			break;
 		}
 	}
 	console.log("VALIDATION: "+dataobj.valid);
