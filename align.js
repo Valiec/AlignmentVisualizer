@@ -330,11 +330,15 @@ function updateScoreTable()
 	{
 		for(var _j = _i; _j<4;_j++)
 		{
+			console.log(mat);
+			console.log(mat.basesr[_i]+mat.basesr[_j]+"m");
 			document.getElementById(mat.basesr[_i]+mat.basesr[_j]).value = mat.getValue(mat.basesr[_i], mat.basesr[_j]);
 			document.getElementById(mat.basesr[_j]+mat.basesr[_i]).value = mat.getValue(mat.basesr[_j], mat.basesr[_i]);
+			document.getElementById(mat.basesr[_i]+mat.basesr[_j]+"m").value = mat.getValue(mat.basesr[_i], mat.basesr[_j]);
 		}	
 	}
 	document.getElementById("gap").value = mat.gap;
+	document.getElementById("gapm").value = mat.gap;
 }
 
 setupScoreTable();
@@ -347,29 +351,44 @@ function updateTable(s1, s2, data, followed)
 	table.innerHTML = "";
 	var row = table.insertRow();
 	var label = document.createElement("th");
-	label.innerHTML = "";
+	var cell = document.createElement("div");
+	cell.className = "tabhead";
+	cell.innerHTML = "";
+	label.appendChild(cell);
 	row.appendChild(label);
 
 	label = document.createElement("th");
-	label.innerHTML = "";
+	cell = document.createElement("div");
+	cell.className = "tabhead";
+	cell.innerHTML = "";
+	label.appendChild(cell);
 	row.appendChild(label);
 	for(var j = 0; j<s2.length; j++)
 	{
 		label = document.createElement("th");
-		label.innerHTML = s2[j];
+		cell = document.createElement("div");
+		cell.className = "tabhead";
+		cell.innerHTML = s2[j];
+		label.appendChild(cell);
 		row.appendChild(label);
 	}
 	row = table.insertRow();
 	rows.push(row);
 	var label = document.createElement("th");
-	label.innerHTML = "";
+	cell = document.createElement("div");
+	cell.className = "tabhead";
+	cell.innerHTML = "";
+	label.appendChild(cell);
 	row.appendChild(label);
 	for(i = 0; i<s1.length; i++)
 	{	
 		row = table.insertRow();
 		rows.push(row);
 		var label = document.createElement("th");
-		label.innerHTML = s1[i];
+		cell = document.createElement("div");
+		cell.className = "tabhead";
+		cell.innerHTML = s1[i];
+		label.appendChild(cell);
 		row.appendChild(label);
 	}
 	for(i = 0; i<=s1.length; i++)
@@ -385,11 +404,11 @@ function updateTable(s1, s2, data, followed)
 			//console.log("TESTING:"+[i, j])
 			if(followed[i][j] == "*")
 			{
-				cell.className = cell.className+" path cell";
+				cell.className = cell.className+" path tabcell";
 			}
 			else
 			{
-				cell.className = cell.className+" other cell";
+				cell.className = cell.className+" other tabcell";
 			}
 			rows[i].appendChild(td);
 		}

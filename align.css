@@ -1,3 +1,8 @@
+body
+{
+	background-color: #FCFCFC; /*#EEEEEE*/
+}
+
 .output
 {
 	font-size: 120%;
@@ -22,49 +27,123 @@
 {
 	display: none;
 }
+
+.outpane
+{
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.scmatd
+{
+	display: none;
+}
+
+.scmatm
+{
+	display: block;
+}
+
+@media(min-width: 992px) {
+
+.scmatd
+{
+	display: block;
+}
+
+.scmatm
+{
+	display: none;
+}
+
+}
+
+.scmatf
+{
+	color: #555555;
+	font-weight: normal;
+	width:100px;
+}
+
+.seq
+{
+	font-weight: normal;
+}
+
 .ins
 {
 	background-image: url(arrowleft.png);
+	background-repeat: no-repeat;
 	color: #0000FF;
 }
 .del
 {
 	background-image: url(arrowup.png);
+	background-repeat: no-repeat;
 	color: #FF0000;
 }
 .mis
 {
 	background-image: url(arrowdiagorange.png);
+	background-repeat: no-repeat;
 	color: #FF8800;
 }
 .mat
 {
-	background-image: url(arrowdiaggreen.png);
+	background-image: url(arrowdiaggreendark.png);
+	background-repeat: no-repeat;
 	color: #000000;
 }
 .sccell
 {
-	border: solid 2px black;
+	border: solid 2px #444444;
 }
 .path
 {
-	border: solid 2px #00FF00;
+	border: solid 3px #00FF00;
 }
 .other
 {
 
 }
-.cell
+.tabcell
 {
+	font-size: 95%;
 	text-align: right;
-	width: 30px;
-	height: 30px;
+	width: 36px;
+	height: 36px;
 }
+.tabhead
+{
+	font-size: 95%;
+	text-align: center;
+	width: 36px;
+	height: 36px;
+}
+
+.scmathead
+{
+	text-align: center;
+}
+
+
 .data
 {
 	font-family: monospace;
 }
+
+/* navbar */
+.navbar-default {
+    background-color: #CDCDE6; /*95A5F0, #5FC6D7*/
+    border-color: #E7E7E7;
+    width: 98%;
+    margin-left: auto;
+	margin-right: auto;
+
+}
+
 #descr
 {
-	width:550px;
+	max-width:550px;
 }
