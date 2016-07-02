@@ -18,10 +18,11 @@ var errmap = {"AA":"A-A match reward", "AT":"A-T/T-A mismatch penalty", "AC":"A-
 var errdata = {noseqs:false};
 
 var descrs = {
-"global": "Global Alignment: <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a mi vitae est dapibus convallis. \
-Aenean aliquam turpis a urna vulputate placerat. Nullam feugiat libero eu tempus vulputate. \
-Suspendisse vehicula vestibulum dui. Nullam in sodales erat. Aliquam auctor ligula et sagittis viverra. \
-Vestibulum efficitur ex vitae facilisis porta.", 
+"global": "Global Alignment: <br>Global alignment is one of the two fundamental alignment algorithms. \
+In global alignment, the initial rows and columns of the dynamic programming table are initialized \
+with increasing multiples of the gap penalty. The score in an table cell is the maximum of the scores \
+of all the possibilities for the cell (insertion, deletion, and match/mismatch) as defined by the scoring matrix. \
+The traceback begins at the cell corresponding to the end of both sequences.", 
 
 "local": "Local Alignment: <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a mi vitae est dapibus convallis. \
 Aenean aliquam turpis a urna vulputate placerat. Nullam feugiat libero eu tempus vulputate. \
@@ -49,6 +50,9 @@ function init()
 	validData = validateInput();
 	inputValid = validData.valid;
 	updateErrors(validData.errors, validData.notices);
+	var option = dropdown.value;
+	var descr = document.getElementById("descr");
+	descr.innerHTML = descrs[option];
 }
 
 function getLargest(scmat)
@@ -331,14 +335,14 @@ function updateScoreTable()
 		for(var _j = _i; _j<4;_j++)
 		{
 			console.log(mat);
-			console.log(mat.basesr[_i]+mat.basesr[_j]+"m");
+			//console.log(mat.basesr[_i]+mat.basesr[_j]+"m");
 			document.getElementById(mat.basesr[_i]+mat.basesr[_j]).value = mat.getValue(mat.basesr[_i], mat.basesr[_j]);
 			document.getElementById(mat.basesr[_j]+mat.basesr[_i]).value = mat.getValue(mat.basesr[_j], mat.basesr[_i]);
-			document.getElementById(mat.basesr[_i]+mat.basesr[_j]+"m").value = mat.getValue(mat.basesr[_i], mat.basesr[_j]);
+			//document.getElementById(mat.basesr[_i]+mat.basesr[_j]+"m").value = mat.getValue(mat.basesr[_i], mat.basesr[_j]);
 		}	
 	}
 	document.getElementById("gap").value = mat.gap;
-	document.getElementById("gapm").value = mat.gap;
+	//document.getElementById("gapm").value = mat.gap;
 }
 
 setupScoreTable();
@@ -368,7 +372,7 @@ function updateTable(s1, s2, data, followed)
 		label = document.createElement("th");
 		cell = document.createElement("div");
 		cell.className = "tabhead";
-		cell.innerHTML = s2[j];
+		cell.innerHTML = s2[j];//+"&nbsp;";
 		label.appendChild(cell);
 		row.appendChild(label);
 	}
@@ -387,7 +391,7 @@ function updateTable(s1, s2, data, followed)
 		var label = document.createElement("th");
 		cell = document.createElement("div");
 		cell.className = "tabhead";
-		cell.innerHTML = s1[i];
+		cell.innerHTML = s1[i];//+"&nbsp;";
 		label.appendChild(cell);
 		row.appendChild(label);
 	}

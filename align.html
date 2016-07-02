@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -9,9 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="align.css" />
 	</head>
 <body onload="init()">
-<nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><p class="navbar-brand">Alignment Visualizer</p><ul class="nav navbar-nav">
-        <li class="active"><a href="">Home<span class="sr-only">(this page)</span></a></li>
-        <li><a href="">About</a></li><li><a href="">Source</a></li></div></div></nav>
+<nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header">
+	<p class="navbar-brand">Alignment Visualizer</p>
+	<ul class="nav navbar-nav no-center">
+        <li class="active"><a href="#">Home<span class="sr-only">(this page)</span></a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">GitHub</a></li>
+    </ul>
+    </div></div>
+</nav>
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-6 col-sm-12">
@@ -23,13 +30,10 @@
 		<option value = "overlap">Overlap Alignment</option>
 	</select></label>
 </form>
-<p id = "descr">Global Alignment: <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a mi vitae est dapibus convallis.
-Aenean aliquam turpis a urna vulputate placerat. Nullam feugiat libero eu tempus vulputate.
-Suspendisse vehicula vestibulum dui. Nullam in sodales erat. Aliquam auctor ligula et sagittis viverra.
-Vestibulum efficitur ex vitae facilisis porta.</p>
+<p id = "descr"></p>
 <form>
-	<label class="">Sequence 1: <input id="s1" class="seq"></input></label>
-	<label class="">Sequence 2: <input id="s2" class="seq"></input></label>
+	<label class="" for="s1">Sequence 1: </label><br><input id="s1" class="seq" /><br>
+	<label class="" for="s2">Sequence 2: </label><br><input id="s2" class="seq" />
 	<br>
 </form>
 
@@ -37,47 +41,32 @@ Vestibulum efficitur ex vitae facilisis porta.</p>
 	<p>Scoring matrix:</p>
 	<table>
 		<tr><th></th> <th class="scmathead">A</th> <th class="scmathead">T</th> <th class="scmathead">C</th> <th class="scmathead">G</th></tr>
-		<tr><th>A</th> <td><input inputmode="numeric" type="number" id = "AA" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "AT" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "AC" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "AG" class="scmatf"></input></td></tr>
-		<tr><th>T</th> <td><input inputmode="numeric" type="number" id = "TA" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "TT" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "TC" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "TG" class="scmatf"></input></td></tr>
-		<tr><th>C</th> <td><input inputmode="numeric" type="number" id = "CA" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "CT" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "CC" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "CG" class="scmatf"></input></td></tr>
-		<tr><th>G</th> <td><input inputmode="numeric" type="number" id = "GA" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "GT" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "GC" class="scmatf"></input></td> <td><input inputmode="numeric" type="number" id = "GG" class="scmatf"></input></td></tr>
+		<tr><th>A&nbsp;&nbsp;</th> <td><input type="number" id = "AA" class="scmatf" /></td> <td><input type="number" id = "AT" class="scmatf" /></td> <td><input type="number" id = "AC" class="scmatf" /></td> <td><input type="number" id = "AG" class="scmatf" /></td></tr>
+		<tr><th>T&nbsp;&nbsp;</th> <td><input type="number" id = "TA" class="scmatf" /></td> <td><input type="number" id = "TT" class="scmatf" /></td> <td><input type="number" id = "TC" class="scmatf" /></td> <td><input type="number" id = "TG" class="scmatf" /></td></tr>
+		<tr><th>C&nbsp;&nbsp;</th> <td><input type="number" id = "CA" class="scmatf" /></td> <td><input type="number" id = "CT" class="scmatf" /></td> <td><input type="number" id = "CC" class="scmatf" /></td> <td><input type="number" id = "CG" class="scmatf" /></td></tr>
+		<tr><th>G&nbsp;&nbsp;</th> <td><input type="number" id = "GA" class="scmatf" /></td> <td><input type="number" id = "GT" class="scmatf" /></td> <td><input type="number" id = "GC" class="scmatf" /></td> <td><input type="number" id = "GG" class="scmatf" /></td></tr>
 	</table>
 	<br>
-	<label>Gap penalty: <input inputmode="numeric" type="number" id = "gap" class="scmatf"></input></label>
-</form></div>
-
-
-<div class="scmatm"><form>
-	<p>Scoring matrix:</p>
-	<label>A-A: <input inputmode="numeric" type="number" id = "AAm" class="scmatf"></input></label><br>
-	<label>A-T: <input inputmode="numeric" type="number" id = "ATm" class="scmatf"></input></label><br>
-	<label>A-C: <input inputmode="numeric" type="number" id = "ACm" class="scmatf"></input></label><br>
-	<label>A-G: <input inputmode="numeric" type="number" id = "AGm" class="scmatf"></input></label><br>
-	<label>T-T: <input inputmode="numeric" type="number" id = "TTm" class="scmatf"></input></label><br>
-	<label>T-C: <input inputmode="numeric" type="number" id = "TCm" class="scmatf"></input></label><br>
-	<label>T-G: <input inputmode="numeric" type="number" id = "TGm" class="scmatf"></input></label><br>
-	<label>C-C: <input inputmode="numeric" type="number" id = "CCm" class="scmatf"></input></label><br>
-	<label>C-G: <input inputmode="numeric" type="number" id = "CGm" class="scmatf"></input></label><br>
-	<label>G-G: <input inputmode="numeric" type="number" id = "GGm" class="scmatf"></input></label><br>
-	<label>Gap penalty: <input inputmode="numeric" type="number" id = "gapm" class="scmatf"></input></label>
+	<label>Gap penalty: <input type="number" id = "gap" class="scmatf" /></label>
 </form></div>
 
 </div>
-<div class="col-md-6">
-<div class="center-block clearfix">
-<div class="center-block"><p id="output" class="outh"><span class="outhead">Alignment:</span><br>
+<div class="col-md-6 col-xs-12">
+<div class="">
+<div class=""><p id="output" class="outh"><span class="outhead">Alignment:</span><br>
 	<span id="s1a" class="data"></span>
 	<br>
 	<span id="pmap" class="data"></span>
 	<br>
 	<span id="s2a" class="data"></span>
 	<br>Score: <span id="sc">0</span>
-</p>
 
-<div class="center-block"><table id="sctab" class="outh"></table></div></div>
+<div class=""><table id="sctab" class="outh"></table></div></p></div>
 
-<div class="center-block"><p><ul id="errors" class="outh"></ul></p></div></div></div></div></div>
+<div class=""><ul id="errors" class="outh"></ul></div></div></div></div>
+<div class="spacer"></div>
+<footer class="footer">©***REMOVED*** ***REMOVED*** 2016</footer></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="align.js"></script></body>
-<html>
+</html>
