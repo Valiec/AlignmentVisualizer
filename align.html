@@ -10,16 +10,24 @@
 	<link rel="stylesheet" type="text/css" href="align.css" />
 	</head>
 <body onload="init()">
-<nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header">
-	<p class="navbar-brand">Alignment Visualizer</p>
-	<ul class="nav navbar-nav no-center">
-        <li class="active"><a href="#">Home<span class="sr-only">(this page)</span></a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">GitHub</a></li>
-    </ul>
-    </div></div>
-</nav>
+<div id="subcell" class="subcell-hidden"><div id="subvaldiag" class="subcell1 colormat">-2</div><div id="subvaldel" class="subcell2">-7</div><div id="subvalins" class="subcell3">-3</div><div id="subvalmain" class="subcell4 colormat">-2</div><div id="subvalzero" class="subcell5">0</div></div>
 <div class="container-fluid">
+<nav class="navbar navbar-default">
+	<div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapsed" aria-expanded="false">
+        <span class="sr-only">Open navigation menu</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	<p class="navbar-brand">Alignment Visualizer</p>
+    </div>
+	<div class="collapse navbar-collapse" id="nav-collapsed"><ul class="nav navbar-nav no-center">
+        <li class="active"><a href="#">Home<span class="sr-only">(this page)</span></a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://github.com/Valiec">GitHub</a></li>
+    </ul></div>
+</nav>
 <div class="row">
 <div class="col-md-6 col-sm-12">
 <form>
@@ -38,7 +46,7 @@
 </form>
 
 <div class="scmatd"><form>
-	<p>Scoring matrix:</p>
+	<br><p class="bold-font">Scoring matrix:</p>
 	<table>
 		<tr><th></th> <th class="scmathead">A</th> <th class="scmathead">T</th> <th class="scmathead">C</th> <th class="scmathead">G</th></tr>
 		<tr><th>A&nbsp;&nbsp;</th> <td><input type="number" id = "AA" class="scmatf" /></td> <td><input type="number" id = "AT" class="scmatf" /></td> <td><input type="number" id = "AC" class="scmatf" /></td> <td><input type="number" id = "AG" class="scmatf" /></td></tr>
@@ -47,7 +55,8 @@
 		<tr><th>G&nbsp;&nbsp;</th> <td><input type="number" id = "GA" class="scmatf" /></td> <td><input type="number" id = "GT" class="scmatf" /></td> <td><input type="number" id = "GC" class="scmatf" /></td> <td><input type="number" id = "GG" class="scmatf" /></td></tr>
 	</table>
 	<br>
-	<label>Gap penalty: <input type="number" id = "gap" class="scmatf" /></label>
+	<label>Gap penalty: <input type="number" id = "gap" class="scmatf" /></label><br>
+	<!--<label>Half-fitting Threshold: <input type="number" id = "threshold" class="scmatf" /></label>-->
 </form></div>
 
 </div>
@@ -65,7 +74,7 @@
 
 <div class=""><ul id="errors" class="outh"></ul></div></div></div></div>
 <div class="spacer"></div>
-<footer class="footer">©***REMOVED*** ***REMOVED*** 2016</footer></div>
+<footer class="footer">©***REMOVED*** ***REMOVED*** 2016 - <a href="#">License</a></footer></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="align.js"></script></body>
